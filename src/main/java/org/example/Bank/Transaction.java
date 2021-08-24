@@ -3,12 +3,12 @@ import java.time.LocalDate;
 
 public class Transaction {
 
-    private final LocalDate date;
-    private final Integer credit;
-    private final Integer debit;
-    private final Integer balance;
+    public final LocalDate date;
+    public final Double credit;
+    public final Double debit;
+    public final Double balance;
 
-    public Transaction(LocalDate date, Integer credit, Integer debit, Integer balance) {
+    public Transaction(LocalDate date, Double credit, Double debit, Double balance) {
         this.date = date;
         this.credit = credit;
         this.debit = debit;
