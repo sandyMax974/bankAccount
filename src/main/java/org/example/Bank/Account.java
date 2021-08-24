@@ -1,23 +1,40 @@
 package org.example.Bank;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Account {
-//    public static Transaction[] transactions;
+    public static ArrayList<Transaction> transactions;
+
     public Account() {
-//        transactions = new Transaction[0];
+        transactions = new ArrayList<Transaction>();
     }
 
-    public static Integer getBalance() {
-        return 1; // find a way to sum all transactions in account
+    public static Double getBalance() {
+        Double currentBalance = null;
+        for (Integer i = 0; i < transactions.size(); i++) {
+            currentBalance += transactions.get(i).credit;
+            currentBalance += transactions.get(i).debit;
+        }
+        if (currentBalance == null) {
+            return 0.00;
+        } else {
+            return currentBalance; // find a way to sum all transactions in account
+        }
     }
 
     public static void addTransactionToAccount(Transaction transaction) {
-//        transactions += transaction; // ERROR with type
+        transactions.add(transaction);
     }
 
     public void deposit(Double amount, LocalDate date) {
-        Double balanceAfterTransaction = getBalance() - amount;
+        Double balanceAfterTransaction = getBalance() + amount;
         Transaction deposit_transaction = new Transaction(date, null, amount, balanceAfterTransaction);
-//        transactions += deposit_transaction; --> addTransactionToAccount(Transaction transaction)
+        addTransactionToAccount(deposit_transaction);
+    }
+
+    public void withdraw(Double amount, LocalDate date) {
+        Double balanceAfterTransaction = getBalance() - amount;
+        Transaction deposit_transaction = new Transaction(date, -amount, null, balanceAfterTransaction);
+        addTransactionToAccount(deposit_transaction);
     }
 }
