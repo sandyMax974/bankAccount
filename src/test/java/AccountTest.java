@@ -27,10 +27,4 @@ public class AccountTest {
         account_001.printStatement();
         Assertions.assertEquals(-24.36, result);
     }
-
-//    @Test
-//    void testPrintStatement() {
-//        account_001.withdraw(124.36, date_01);
-//        account_001.deposit(156.90, date_02);
-//    }
 }

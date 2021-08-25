@@ -1,8 +1,6 @@
 package org.example.Bank;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Comparator;
 
 public class Account {
@@ -40,13 +38,31 @@ public class Account {
 
     public void printStatement() {
         //printStatementHeader(); => to be defined, separate class Statement
+        String statementHeader = "date || credit || debit || balance";
+        System.out.println(statementHeader);
         //sort transactions array in asc order based on date Collections.sort(myNumbers);
         transactions.sort(Comparator.comparing(Transaction::getTransactionDate).reversed());
-        for(int i = 0; i < transactions.size(); i++) {
-            System.out.println(transactions.get(i).date);
-            System.out.println(transactions.get(i).balance);
-        }
         //store each line data into variable
-        //define the statement template
+        for(int i = 0; i < transactions.size(); i++) {
+            String statementLineDate = String.valueOf(transactions.get(i).date);
+            String statementLineBalance = String.valueOf(transactions.get(i).balance);
+
+            String statementLineCredit;
+            if(transactions.get(i).credit == null) {
+                statementLineCredit = "-";
+            } else {
+                statementLineCredit = String.valueOf(transactions.get(i).credit);
+            }
+
+            String statementLineDebit;
+            if(transactions.get(i).debit == null) {
+                statementLineDebit = "-";
+            } else {
+                statementLineDebit = String.valueOf(transactions.get(i).debit);
+            }
+            //define the statement template
+            String statementLine = String.format("%s || %s || %s || %s",statementLineDate, statementLineCredit,statementLineDebit,statementLineBalance);
+            System.out.println(statementLine);
+        }
     }
 }
