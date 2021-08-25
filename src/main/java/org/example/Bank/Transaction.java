@@ -15,4 +15,15 @@ public class Transaction {
         this.balance = balance;
     }
 
+    public LocalDate getTransactionDate() {
+        return this.date;
+    }
+
+//    @Override
+//    public int compareTo(Transaction o) {
+//        if(getTransactionDate() == null || o.getTransactionDate() == null) {
+//            return 0;
+//        }
+//        return getTransactionDate().compareTo(o.getTransactionDate());
+//    }
 }

@@ -1,6 +1,9 @@
 package org.example.Bank;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
 
 public class Account {
     public static ArrayList<Transaction> transactions;
@@ -9,32 +12,41 @@ public class Account {
         transactions = new ArrayList<Transaction>();
     }
 
-    public static Double getBalance() {
-        Double currentBalance = null;
+    public Double getCurrentBalance() {
+        Double currentBalance = 0.00;
         for (Integer i = 0; i < transactions.size(); i++) {
-            currentBalance += transactions.get(i).credit;
-            currentBalance += transactions.get(i).debit;
+            if(transactions.get(i).credit != null) { currentBalance += transactions.get(i).credit; }
+            if(transactions.get(i).debit != null) { currentBalance -= transactions.get(i).debit; }
         }
-        if (currentBalance == null) {
-            return 0.00;
-        } else {
-            return currentBalance; // find a way to sum all transactions in account
-        }
+        return currentBalance;
     }
 
-    public static void addTransactionToAccount(Transaction transaction) {
+    public void addTransactionToAccount(Transaction transaction) {
         transactions.add(transaction);
     }
 
-    public void deposit(Double amount, LocalDate date) {
-        Double balanceAfterTransaction = getBalance() + amount;
+    public void withdraw(Double amount, LocalDate date) {
+        Double balanceAfterTransaction = getCurrentBalance() - amount;
         Transaction deposit_transaction = new Transaction(date, null, amount, balanceAfterTransaction);
         addTransactionToAccount(deposit_transaction);
     }
 
-    public void withdraw(Double amount, LocalDate date) {
-        Double balanceAfterTransaction = getBalance() - amount;
-        Transaction deposit_transaction = new Transaction(date, -amount, null, balanceAfterTransaction);
+    public void deposit(Double amount, LocalDate date) {
+        Double balanceAfterTransaction = getCurrentBalance() + amount;
+        Transaction deposit_transaction = new Transaction(date, amount, null, balanceAfterTransaction);
         addTransactionToAccount(deposit_transaction);
+    }
+
+
+    public void printStatement() {
+        //printStatementHeader(); => to be defined, separate class Statement
+        //sort transactions array in asc order based on date Collections.sort(myNumbers);
+        transactions.sort(Comparator.comparing(Transaction::getTransactionDate).reversed());
+        for(int i = 0; i < transactions.size(); i++) {
+            System.out.println(transactions.get(i).date);
+            System.out.println(transactions.get(i).balance);
+        }
+        //store each line data into variable
+        //define the statement template
     }
 }
