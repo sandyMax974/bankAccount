@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 public class Account {
     public static ArrayList<Transaction> transactions;
-    public Double overdraft;
+    private Double overdraft;
 
     public Account() {
         transactions = new ArrayList<Transaction>();
@@ -25,7 +25,7 @@ public class Account {
         return currentBalance;
     }
 
-    public void addTransactionToAccount(Transaction transaction) {
+     private void addTransactionToAccount(Transaction transaction) {
         transactions.add(transaction);
     }
 
@@ -53,12 +53,12 @@ public class Account {
         }
     }
 
-    void printStatementHeader() {
+    private void printStatementHeader() {
         String statementHeader = "date || credit || debit || balance";
         System.out.println(statementHeader);
     }
 
-    void printStatementData(String transactionDate, String transactionCredit, String transactionDebit, String transactionBalance) {
+    private void printStatementData(String transactionDate, String transactionCredit, String transactionDebit, String transactionBalance) {
         String statementLine = String.format("%s || %s || %s || %s",transactionDate, transactionCredit,transactionDebit,transactionBalance);
         System.out.println(statementLine);
     }
