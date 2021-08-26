@@ -16,6 +16,17 @@ public class AccountTest {
     }
 
     @Test
+    void testTransactionUsesTodayDateIfNoDateSupplied() {
+        account_001.deposit(250.00);
+        LocalDate result_01 = account_001.transactions.get(0).getTransactionDate();
+        Assertions.assertEquals(LocalDate.now(), result_01);
+
+        account_001.withdraw(50.00);
+        LocalDate result_02 = account_001.transactions.get(1).getTransactionDate();
+        Assertions.assertEquals(LocalDate.now(), result_02);
+    }
+
+    @Test
     void testDepositUpdatesAccountBalance() {
         account_001.deposit(156.90, date_01);
         Assertions.assertEquals(1, account_001.transactions.size());

@@ -42,6 +42,19 @@ public class Account {
             }
         }
     }
+    public void withdraw(Double amount) {
+        if(amount <= 0) {
+            throw new IllegalArgumentException("Cannot withdraw negative amount");
+        } else {
+            Double balanceAfterTransaction = getCurrentBalance() - amount;
+            if(balanceAfterTransaction < -overdraft) {
+                throw new ArithmeticException("Unauthorized operation, insufficient fund");
+            } else {
+                Transaction deposit_transaction = new Transaction(LocalDate.now(), null, amount, balanceAfterTransaction);
+                addTransactionToAccount(deposit_transaction);
+            }
+        }
+    }
 
     public void deposit(Double amount, LocalDate date) {
         if(amount <= 0) {
@@ -49,6 +62,15 @@ public class Account {
         } else {
             Double balanceAfterTransaction = getCurrentBalance() + amount;
             Transaction deposit_transaction = new Transaction(date, amount, null, balanceAfterTransaction);
+            addTransactionToAccount(deposit_transaction);
+        }
+    }
+    public void deposit(Double amount) {
+        if(amount <= 0) {
+            throw new IllegalArgumentException("Cannot deposit negative amount");
+        } else {
+            Double balanceAfterTransaction = getCurrentBalance() + amount;
+            Transaction deposit_transaction = new Transaction(LocalDate.now(), amount, null, balanceAfterTransaction);
             addTransactionToAccount(deposit_transaction);
         }
     }
