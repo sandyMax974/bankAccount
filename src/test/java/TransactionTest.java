@@ -13,7 +13,6 @@ public class TransactionTest {
         Double debit = transaction_001.getTransactionDebit();
         Assertions.assertEquals(50.60, debit);
     }
-
     @Test
     void checkTransactionBalanceFieldIsPresent() {
         LocalDate date = LocalDate.of(2021, 8, 14);
@@ -21,7 +20,6 @@ public class TransactionTest {
         Double balance = transaction_001.getBalanceAfterTransaction();
         Assertions.assertEquals(150.50, balance);
     }
-
     @Test
     void checkTransactionCreditFieldIsPresent() {
         LocalDate date = LocalDate.of(2021, 8, 14);
