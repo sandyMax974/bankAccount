@@ -25,7 +25,7 @@ public class Account {
         return currentBalance;
     }
 
-     private void addTransactionToAccount(Transaction transaction) {
+    private void addTransactionToAccount(Transaction transaction) {
         transactions.add(transaction);
     }
 
@@ -53,38 +53,19 @@ public class Account {
         }
     }
 
-    private void printStatementHeader() {
-        String statementHeader = "date || credit || debit || balance";
-        System.out.println(statementHeader);
-    }
-
-    private void printStatementData(String transactionDate, String transactionCredit, String transactionDebit, String transactionBalance) {
-        String statementLine = String.format("%s || %s || %s || %s",transactionDate, transactionCredit,transactionDebit,transactionBalance);
-        System.out.println(statementLine);
-    }
 
     public void printStatement() {
-        printStatementHeader();
+        Statement statement = new Statement();
+        statement.printStatementHeader();
+
         transactions.sort(Comparator.comparing(Transaction::getTransactionDate).reversed());
         for(int i = 0; i < transactions.size(); i++) {
-            String statementLineDate = String.valueOf(transactions.get(i).getTransactionDate());
-            String statementLineBalance = String.valueOf(transactions.get(i).getBalanceAfterTransaction());
+            String statementLineDate = statement.printGeTransactionDate(transactions.get(i));
+            String statementLineBalance = statement.printGeTransactionBalance(transactions.get(i));
+            String statementLineCredit = statement.printGeTransactionCredit(transactions.get(i));
+            String statementLineDebit = statement.printGeTransactionDebit(transactions.get(i));
 
-            String statementLineCredit;
-            if(transactions.get(i).getTransactionCredit() == null) {
-                statementLineCredit = "-";
-            } else {
-                statementLineCredit = String.valueOf(transactions.get(i).getTransactionCredit());
-            }
-
-            String statementLineDebit;
-            if(transactions.get(i).getTransactionDebit() == null) {
-                statementLineDebit = "-";
-            } else {
-                statementLineDebit = String.valueOf(transactions.get(i).getTransactionDebit());
-            }
-
-            printStatementData(statementLineDate, statementLineCredit,statementLineDebit,statementLineBalance);
+            statement.printStatementData(statementLineDate, statementLineCredit,statementLineDebit,statementLineBalance);
         }
     }
 }
