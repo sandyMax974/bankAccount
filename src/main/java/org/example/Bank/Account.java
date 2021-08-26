@@ -13,8 +13,8 @@ public class Account {
     public Double getCurrentBalance() {
         Double currentBalance = 0.00;
         for (Integer i = 0; i < transactions.size(); i++) {
-            if(transactions.get(i).credit != null) { currentBalance += transactions.get(i).credit; }
-            if(transactions.get(i).debit != null) { currentBalance -= transactions.get(i).debit; }
+            if(transactions.get(i).getTransactionCredit() != null) { currentBalance += transactions.get(i).getTransactionCredit(); }
+            if(transactions.get(i).getTransactionDebit() != null) { currentBalance -= transactions.get(i).getTransactionDebit(); }
         }
         return currentBalance;
     }
@@ -44,21 +44,21 @@ public class Account {
         transactions.sort(Comparator.comparing(Transaction::getTransactionDate).reversed());
         //store each line data into variable
         for(int i = 0; i < transactions.size(); i++) {
-            String statementLineDate = String.valueOf(transactions.get(i).date);
-            String statementLineBalance = String.valueOf(transactions.get(i).balance);
+            String statementLineDate = String.valueOf(transactions.get(i).getTransactionDate());
+            String statementLineBalance = String.valueOf(transactions.get(i).getBalanceAfterTransaction());
 
             String statementLineCredit;
-            if(transactions.get(i).credit == null) {
+            if(transactions.get(i).getTransactionCredit() == null) {
                 statementLineCredit = "-";
             } else {
-                statementLineCredit = String.valueOf(transactions.get(i).credit);
+                statementLineCredit = String.valueOf(transactions.get(i).getTransactionCredit());
             }
 
             String statementLineDebit;
-            if(transactions.get(i).debit == null) {
+            if(transactions.get(i).getTransactionDebit() == null) {
                 statementLineDebit = "-";
             } else {
-                statementLineDebit = String.valueOf(transactions.get(i).debit);
+                statementLineDebit = String.valueOf(transactions.get(i).getTransactionDebit());
             }
             //define the statement template
             String statementLine = String.format("%s || %s || %s || %s",statementLineDate, statementLineCredit,statementLineDebit,statementLineBalance);

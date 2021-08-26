@@ -3,10 +3,10 @@ import java.time.LocalDate;
 
 public class Transaction {
 
-    public final LocalDate date;
-    public final Double credit;
-    public final Double debit;
-    public final Double balance;
+    private final LocalDate date;
+    private final Double credit;
+    private final Double debit;
+    private final Double balance;
 
     public Transaction(LocalDate date, Double credit, Double debit, Double balance) {
         this.date = date;
@@ -18,12 +18,15 @@ public class Transaction {
     public LocalDate getTransactionDate() {
         return this.date;
     }
+    public Double getTransactionCredit() {
+        return this.credit;
+    }
+    public Double getTransactionDebit() {
+        return this.debit;
+    }
+    public Double getBalanceAfterTransaction() {
+        return this.balance;
+    }
 
-//    @Override
-//    public int compareTo(Transaction o) {
-//        if(getTransactionDate() == null || o.getTransactionDate() == null) {
-//            return 0;
-//        }
-//        return getTransactionDate().compareTo(o.getTransactionDate());
-//    }
+
 }

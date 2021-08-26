@@ -27,4 +27,7 @@ public class AccountTest {
         account_001.printStatement();
         Assertions.assertEquals(-24.36, result);
     }
+    @Test
+    void testPrintStatementIsCorrectFormat() {
+    }
 }

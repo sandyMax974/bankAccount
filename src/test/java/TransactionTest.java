@@ -10,7 +10,7 @@ public class TransactionTest {
     void checkTransactionDebitFieldIsPresent() {
         LocalDate date = LocalDate.of(2021, 8, 14);
         Transaction transaction_001 = new Transaction(date, null, 50.60, 150.50);
-        Double debit = transaction_001.debit;
+        Double debit = transaction_001.getTransactionDebit();
         Assertions.assertEquals(50.60, debit);
     }
 
@@ -18,7 +18,7 @@ public class TransactionTest {
     void checkTransactionBalanceFieldIsPresent() {
         LocalDate date = LocalDate.of(2021, 8, 14);
         Transaction transaction_001 = new Transaction(date, null, 50.60, 150.50);
-        Double balance = transaction_001.balance;
+        Double balance = transaction_001.getBalanceAfterTransaction();
         Assertions.assertEquals(150.50, balance);
     }
 
@@ -26,7 +26,7 @@ public class TransactionTest {
     void checkTransactionCreditFieldIsPresent() {
         LocalDate date = LocalDate.of(2021, 8, 14);
         Transaction transaction_001 = new Transaction(date, 14.80, null, 150.50);
-        Double credit = transaction_001.credit;
+        Double credit = transaction_001.getTransactionCredit();
         Assertions.assertEquals(14.80, credit);
     }
 }
