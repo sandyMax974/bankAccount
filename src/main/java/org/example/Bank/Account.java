@@ -70,8 +70,6 @@ public class Account {
             String statementLineDate = String.valueOf(transactions.get(i).getTransactionDate());
             String statementLineBalance = String.valueOf(transactions.get(i).getBalanceAfterTransaction());
 
-//            System.out.println(transactions.get(i).getBalanceAfterTransaction().getClass());
-
             String statementLineCredit;
             if(transactions.get(i).getTransactionCredit() == null) {
                 statementLineCredit = "-";
